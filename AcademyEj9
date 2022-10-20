@@ -1,0 +1,37 @@
+// Sabiendo que 31557600 segundos es un año y que los periodos orbitales son:
+
+// final Map<String, double> periodosOrbitales = {
+// 	'Tierra': 1,
+//  'Mercurio': 0.2408467,
+// 	'Marte': 1.8808158,
+// 	'Saturno': 29.447498,
+// };
+
+// Debemos conseguir lo siguiente:
+
+// 1. Crear un método que espere un parámetro int donde pasaremos unos años en segundos y un parámetro string para pasarle el nombre del planeta.
+// 2. Este método deberé hacer los cálculos necesarios teniendo en cuenta el periodo orbital del planeta que le hemos pasado.
+// 3. El resultado sera la conversion de los segundos a años en cada planeta.
+// 4. Pintar el resultado en la función “main”
+
+void main() {
+  String inPlanet =
+      'saturn'; //[mercury, earth, mars, saturn] : doble clic, copiar y pegar
+  int inSec = 31557600;
+
+  Map<String, double> planets = {'mercury':0.2408467, 'earth':1, 'mars':1.8808158, 'saturn':29.447498};
+  
+  double asYears = orbitTimeCalculator(inSec, inPlanet, planets);
+
+  print('$asYears vueltas en $inSec segundos');
+}
+
+orbitTimeCalculator(int inSec, String inPlanet, Map planets) {
+  double planetRate;
+  
+  planetRate = planets[inPlanet]/31557600;
+//obtengo la velocidad por segundo del planeta
+//y multiplico el valor por la cantidad de segundos
+  double result;
+  return result = inSec * planetRate;
+}

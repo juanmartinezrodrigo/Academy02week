@@ -1,0 +1,43 @@
+// Dada la frase, “Uno para ti, uno para mi”.
+
+// Debemos conseguir lo siguiente:
+
+// 1. Crear un método que devuelva a la función main la frase.
+// 2. Pintar el resultado en la función “main”;
+// 3. En caso de que se proporcione un nombre a la función la palabra “ti” sera sustituida por el nombre dado.
+// 4. (Si es posible) agregar una validación para comprobar que no se proporciona un string vacío a la función.
+
+void main() {
+  String const laFrase = 'Uno para ti, uno para mi.';
+  String const placeholder = 'ti';        //con esto se puede cambiar fácil la palabra a sustituir
+  String const input = 'william';       //input
+
+  String const modifiedPhrase = phraseModifier(laFrase, placeholder, input);
+  //esto llama al método que cambia la frase si se dan las condiciones
+  print(modifiedPhrase);
+  //la frase se printea en el main
+}
+
+String phraseModifier(String laFraseM, String placeholderM, String? inputM) {
+
+  List<String> phraseCollection = laFraseM.split(placeholderM);
+  //crea una list con las partes de la frase separadas por placeholder
+
+  if (phraseCollection.length > 1 && inputM != '') {
+  String modifiedPhraseM = '';
+  //este será el valor a devolver si la frase es modificada
+    for (int index = 0; index < (phraseCollection.length); index++) {
+      //junta las piezas antes separadas
+      modifiedPhraseM = '$modifiedPhraseM${phraseCollection[index]}';
+      //añade el input entre cada trozo de frase
+      if (index < (phraseCollection.length - 1)) {
+        modifiedPhraseM = '$modifiedPhraseM$inputM';
+      }
+    }
+  return modifiedPhraseM;
+  //dentro del if(), pero fuera del for() para devolver la frase una vez cambiada
+  }else {
+    return laFraseM;
+    //si no es modificable, la devuelve tal cual
+  }
+}

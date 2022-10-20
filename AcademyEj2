@@ -1,0 +1,59 @@
+//Partiendo de la siguiente lista de palabras, separa en diferentes arrays las que empiezan por la misma letra,
+//teniendo un total de 6 arrays nuevos como resultado pero sin utilizar ningún método de la clase List:
+
+//          List listado = [‘aguacate’, ‘disfraz’, ‘huerto’, ‘baden’, ‘tortilla’, ‘billar’, ‘francés’, ‘dieresis’, ‘aceituna’, ‘almendra’, ‘hígado’, ‘frente’, ‘tiempo’, ‘frenar’, ‘diferencia’, ‘hueso’, ‘burro’, ‘terreno’];
+
+//El resultado a obtener por consola es:
+
+//          Palabras que empiezan por a -> [‘aguacate’, ‘aceituna’, ‘almendra’]
+//          Palabras que empiezan por b -> [‘baden’, ‘burro’, ‘billar’]
+//          Palabras que empiezan por d -> [‘disfraz’, ‘diéresis’, ‘diferencia’]
+//          Palabras que empiezan por f -> [‘francés’, ‘frente’, ‘frenar’]
+//          Palabras que empiezan por h -> [‘huerto’, ‘hígado’, ‘hueso’]
+//          Palabras que empiezan por t -> [‘tortilla’, ‘tiempo’, ‘terreno’]
+
+void main() {
+  List<String> const listado = [
+    'aguacate',
+    'disfraz',
+    'huerto',
+    'baden',
+    'tortilla',
+    'billar',
+    'francés',
+    'dieresis',
+    'aceituna',
+    'almendra',
+    'hígado',
+    'frente',
+    'tiempo',
+    'frenar',
+    'diferencia',
+    'hueso',
+    'burro',
+    'terreno'
+  ];
+
+  Map<String, String> list = Map();
+
+  for (String wordInUse in listado) {
+    //con un bucle que recorre el listado de palabras
+    //añado las palabras una a una a su correspondiente categoría
+    String startingLetter = wordInUse.split("")[0];    
+
+    if (list[startingLetter] != null) {
+      //y con este if evito nulls en los string de valor
+      list[startingLetter] = '${list[startingLetter]}, $wordInUse';
+    } else {
+      list[startingLetter] = wordInUse;
+    }
+  }
+  
+  Iterable<String> const keyList = list.keys;
+  
+  for(String currentKey in keyList){
+    //y con un iterable, al final creo un bucle que imprime cada línea
+    print('palabras que empiezan por $currentKey -> ${list[currentKey]}');
+  }
+  
+}

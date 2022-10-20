@@ -1,0 +1,97 @@
+//Crea una clase llamada Programador que tenga el constructor ordinario y
+//también tengo un constructor fromJson para poder crear un objeto de
+//esta a partir de un mapa. Crea también un método toString para poder
+//mostrar el contenido del objeto con el siguiente  formato:
+
+//Nombre: Pepe, Edad: 25, techLead: false
+
+//El constructor fromJson tiene que ser capaz de crear un objeto de la clase con los siguientes json:
+
+/* {
+    "nombre": "Juan",
+    "edad": 123,
+    "techLead": true,
+    "horasExtras": "true"
+ }
+
+{
+    "nombre": null,
+    "edad": 123,
+    "techLead": false,
+    "horasExtras": "false"
+ }
+
+{
+    "edad": false,
+    "techLead":  222,
+    "horasExtras": "false"
+ }
+
+{
+    Juan: "nombre",
+    123: "edad",
+    false: "josemaria",
+    3.14: "pi",
+}     */
+
+void main() {
+  Map json = {
+    "nombre": "Juan",
+    "edad": 123,
+    "techLead": true,
+    "horasExtras": "true"
+  };
+}
+
+class Programador {
+  String? nombre;
+  int? edad;
+  bool? techlead;
+  bool? horasExtra;
+
+  Programador(String? nombre, int? edad, bool? techlead, bool? horasExtra) {
+    nombre = nombre ?? 'sin nombre';
+    edad = edad ?? 0;
+    techlead = techlead ?? false;
+    horasExtra = horasExtra ?? false;
+  }
+
+  Programador.fromJson(Map<dynamic, dynamic> json) {
+    Iterable keys = json.keys;
+
+    this.nombre = 'nombre desconocido';
+    this.edad = 0;
+    this.techlead = false;
+    this.horasExtra = false;
+    //el constructor asigna de primeras valores por defecto a todas las variables
+    //después recorre un iterable con todas las keys para buscar el nombre de las variables
+    //de esta forma las puede encontrar independientemente de cuantos valores lleguen, o de su orden
+    for (var key in keys) {
+      if (key == 'nombre') {
+        try {
+          this.nombre = json[key].toString();
+        } catch (e) {}
+      }
+      if (key == 'edad') {
+        try {
+          this.edad = int.parse(json[key]);
+        } catch (e) {}
+      }
+      if (key == 'techlead') {
+        try {
+          this.techlead = json[key].parseBool();
+        } catch (e) {}
+      }
+      if (key == 'horasExtra') {
+        try {
+          this.horasExtra = json[key].parseBool();
+        } catch (e) {}
+      }
+    }
+  }
+  //en el bucle se intenta pasar el value correspondiente a la variable
+  @override
+  String toString() {
+    return 'nombre: $nombre, Edad: $edad, techlead: $techlead';
+  }
+}

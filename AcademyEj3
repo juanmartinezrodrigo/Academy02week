@@ -1,0 +1,87 @@
+//Partiendo de la siguiente lista de mapas(json),
+//ordena los elementos de menor a mayor precio y
+//de mayor a menor precio sin utilizar sort:
+
+//List<Map<String, dynamic>> products = [
+//  {"name": "Zapatillas", "price": 100},
+//  {"name": "Pantalones", "price": 50},
+//  {"name": "Libros", "price": 10},
+//  {"name": "Lámpara", "price": 40},
+//  {"name": "Ventilador", "price": 200},
+//];
+
+//El resultado a obtener es:
+
+//Precio ascendente: [
+//	{name: Libros, price: 10},
+//	{name: Lampara, price: 40},
+//	{name: Pantalones, price: 50},
+//	{name: Zapatillas, price: 100},
+//	{name: Ventilador, price: 200},
+//]
+
+//Precio descendente:[
+//  {name: Ventilador, price: 200},
+//	{name: Zapatillas, price: 100},
+//  {name: Pantalones, price: 50},
+//	{name: Lampara, price: 40},
+//	{name: Libros, price: 10},
+//]
+
+void main() {
+  List<Map<String, dynamic>> products = [
+    {"name": "Zapatillas", "price": 100},
+    {"name": "Pantalones", "price": 50},
+    {"name": "Libros", "price": 10},
+    {"name": "Lámpara", "price": 40},
+    {"name": "Ventilador", "price": 200},
+  ];
+
+  print('ascendente');
+  //como .IO no funciona, simulo aquí una solicitud ascendente y una descendente
+  both(products, 1);
+  print('');
+  //llamando a un método que los puede ordenar en ambas direcciones
+  print('descendente');
+  both(products, -1);
+}
+
+void both(List<Map<String, dynamic>> products, int order) {
+  //recibe la List con los valores guardados
+  int currentPosition = 0;
+  while (currentPosition < (products.length - 1)) {
+  //y empieza un bucle que va colocando los valores en su sitio uno a uno.
+    Map<String, dynamic> auxMap = {
+      'name': '',
+      'price': -1
+    }; 
+    //la variable order se usa en el if() para determinar cuando se activa intercambiando
+    //las posiciones de los maps cuando entran en el if hasta dejarlos en su lugar
+    if (products.elementAt(currentPosition).values.elementAt(1).compareTo(
+            products.elementAt(currentPosition + 1).values.elementAt(1)) ==
+        order) {
+//el método que he usado se llama "insertion sort"
+      auxMap['name'] = 
+          products.elementAt(currentPosition + 1).values.elementAt(0); 
+      auxMap['price'] =
+          products.elementAt(currentPosition + 1).values.elementAt(1);
+      products[currentPosition + 1]['name'] =
+          products.elementAt(currentPosition).values.elementAt(0);
+      products[currentPosition + 1]['price'] =
+          products.elementAt(currentPosition).values.elementAt(1);
+      products[currentPosition]['name'] = auxMap.values.elementAt(0);
+      products[currentPosition]['price'] = auxMap.values.elementAt(1);
+
+      if (currentPosition > 0) {
+        currentPosition--;
+      }
+    } else {
+      currentPosition++;
+    }
+  }
+  for (Map product in products) {
+    //finalmente los imprime en el orden en que acaban
+    print(
+        'name: ${product.values.elementAt(0)}, price: ${product.values.elementAt(1)}');
+  }
+}

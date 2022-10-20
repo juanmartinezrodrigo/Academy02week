@@ -1,0 +1,58 @@
+// Dada un numero, debemos comprobar si es o no un numero de Amstrong.
+
+// Debemos conseguir los siguiente:
+
+// 1. Crear un método que devuelva true o false y que espere un numero.
+// 2. Pintar el resultado en la función “main”;
+
+// ## **Ejemplo**
+
+// Pasando un numero a la función.
+
+// La consola debe imprimir:
+
+// "false, no es un numero de Amstrong"
+
+// "true, si es un numero de Amstrong"
+
+import 'dart:math' as math;
+
+void main() {
+  int const input = 371;//esto simula el input
+//manda el número al método
+//y devuelve true/false
+  bool armstrong = armstrongCheck(input);
+//dependiendo del resultado muestra una linea u otra por consola
+  if (armstrong) {
+    print('armstrong');
+  } else {
+    print('armweak');
+  }
+}
+
+bool armstrongCheck(int input) {
+  bool armstrong;
+  int const savedInput = input;
+  int addedValue = 0;
+  List<int> digits = [];
+//este bucle divide entre 10 el número y separa el resto hasta dejar vacío el int dado
+  while (input > 0) {
+    digits.add(input % 10);
+    input = (input ~/ 10);
+  }
+//y este otro bucle suma los resultados de las potencias de cada cifra
+  for (int digit in digits) {
+    print(addedValue);
+    addedValue = addedValue + math.pow(digit, digits.length).toInt();
+    print(addedValue);
+  }
+  //por último compara la suma de potencias con el número original
+  //da valor a la booleana y la devuelve
+  if (addedValue == savedInput) {
+    armstrong = true;
+  } else {
+    armstrong = false;
+  }
+
+  return armstrong;
+}

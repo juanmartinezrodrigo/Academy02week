@@ -1,0 +1,27 @@
+// Para realizar esta parte del ejercicio solo puedes consultar el siguiente enlace:
+
+// [https://api.flutter.dev/flutter/dart-core/DateTime-class.html](https://api.flutter.dev/flutter/dart-core/DateTime-class.html)
+
+// Crea un objeto de la clase DateTime con fecha 24/03/2051 y otro con la fecha del día de hoy. 
+
+// Realiza los siguientes cálculos:
+
+// - Calcula la diferencia en días
+// - Calcula la diferencia en horas
+// - Calcula la diferencia en minutos
+// - Calcula la diferencia en segundos
+
+
+
+void main(){
+  final FutureDate = DateTime.parse('2051-03-24');
+  final Today = DateTime.now();
+  
+  
+  final timeGap = FutureDate.difference(Today);
+  print(timeGap.inDays);
+  print(timeGap.inHours);
+  print(timeGap.inMinutes);
+  print(timeGap.inSeconds);
+  
+}

@@ -1,0 +1,42 @@
+// Partiendo de la siguiente lista, ordena los elementos en orden ascendente sin utilizar sort:
+//
+//
+//                    List<int> listado = [24, 118, 1, -54, 54, 3050];
+//
+//
+//El resultado a obtener por consola es es:
+//
+//
+//                    [-54, 1, 24, 54, 118, 3050]
+//
+//
+
+void main(){
+  List<int> listado = [24, 118, 1, -54, 54, 3050];
+  int currentPosition = 0;
+  
+  do {
+    int smallerN;
+    
+    if (listado.elementAt(currentPosition).compareTo(listado.elementAt(currentPosition+1))>0) { 
+      //el programa compara un valor del list con el siguiente, si el segundo es menor
+      //intercambia las posiciones con ayuda de una variable auxiliar
+      
+      smallerN = listado.elementAt(currentPosition+1);
+      listado[currentPosition+1] = listado.elementAt(currentPosition);
+      listado[currentPosition] = smallerN;
+    
+      if(currentPosition > 0){
+        //después si el índice es mayor que 0 retrocede una posición y repite el ciclo,
+        //dejando la variable después de la siguiente más pequeña y antes de la siguiente más grande
+      currentPosition--;
+      }
+    }else {currentPosition++;}
+    //cuando la siguiente es mayor, simplemente aumenta el índice para comparar el siguiente par
+    
+  } while (currentPosition < (listado.length-1));
+  
+  print(listado);
+  //finalmente muestra la lista ya ordenada por consola
+  
+}

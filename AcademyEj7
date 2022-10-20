@@ -1,0 +1,31 @@
+// Dada una frase, cuenta las ocurrencias de cada *palabra* en esa frase.
+
+// Al contar palabras, puede asumir las siguientes reglas:
+
+// 1. El recuento no distingue entre *mayúsculas y minúsculas* (es decir, "tu", "tu" y "tu" son 3 usos de la misma palabra)
+// 2. El resultado debe respetar el orden de escritura.
+// 3. Las palabras pueden estar separadas por *cualquier* forma de espacio en blanco (es decir, "\t", "\n", " ").
+
+
+void main(){
+  String fraseDada = 'eL CiELo EsTa EnLaDriLlAdO\tqUiEn lO dEsEnLadRiLlara\nel desenladrillador que lo desenladrille\tbuen desenladrillador sera';
+  
+  fraseDada = fraseDada.toLowerCase();
+  //paso todo a minuscula porque no diferencia mayúsculas
+  List<String> wordsList=fraseDada.split(RegExp('[\n, \t, " "]'));
+  //convierto el string en una lista de palabras
+  Map<String,int> wordMap = Map();
+  
+  
+  //y uso un bucle para añadir palabras a un map con valor 1,
+  //o si ya estaba en el map, sumar 1 al valor
+  for(String word in wordsList){
+    if(wordMap.containsKey(word)){
+      wordMap.update(word, (value) => value = (wordMap[word]!+1));
+    }else{
+      wordMap.addEntries({word:1}.entries);}
+  }
+  
+  print(wordMap);
+  //y finalmente lo saco por consola
+}
